@@ -179,6 +179,8 @@
   .back-btn:hover { border-color: var(--gold); color: var(--gold); }
   .archive-link { display: inline-block; color: var(--gold); font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 1px; text-decoration: none; border-bottom: 1px dashed var(--gold); transition: color 0.2s; }
   .archive-link:hover { color: var(--paper); }
+  .player-links { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
+  .player-links .archive-link[hidden] { display: none; }
   footer { background: var(--charcoal); border-top: 3px solid var(--blood-red); padding: 40px; margin-top: 60px; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto 30px; }
   .footer-about .logo-main { font-size: 28px; margin-bottom: 12px; }
@@ -314,7 +316,10 @@
     <h2 class="now-playing-title" id="nowPlayingTitle"></h2>
     <div class="now-playing-meta" id="nowPlayingMeta"></div>
     <p class="now-playing-desc" id="nowPlayingDesc"></p>
-    <a id="archiveLink" class="archive-link" href="#" target="_blank">View on Internet Archive →</a>
+    <div class="player-links">
+      <a id="archiveLink" class="archive-link" href="#" target="_blank">View on Internet Archive →</a>
+      <a id="imdbLink" class="archive-link" href="#" target="_blank" hidden>View on IMDb →</a>
+    </div>
     <!-- BELOW-PLAYER AD -->
     <div class="ad-unit" style="margin:20px 0;min-height:90px;">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true" data-ad-placement="player-footer"></ins>
@@ -376,7 +381,7 @@ const movies = [
   { id:'snake-tiger-crane', title:'The Snake, The Tiger, The Crane', year:1980, genre:'wuxia', runtime:'90 min', origin:'Hong Kong', badge:'', description:'A one-armed princess searches for patriots to assassinate the bandit king who murdered the Emperor. Stars Carter Wong and Nancy Yen.', archiveId:'TheSnakeTheTigerTheCraneMPEG', bgColor:'linear-gradient(135deg, #1a1a2e 0%, #1a1a1a 100%)' },
   { id:'9-deaths-ninja', title:'9 Deaths of the Ninja', year:1985, genre:'ninja', runtime:'94 min', origin:'USA', badge:'80s Action', description:'Sho Kosugi stars in this wild jungle adventure. A squad of elite fighters must rescue hostages from a terrorist army. Peak 80s ninja action.', archiveId:'9-deaths-of-the-ninja_202207', bgColor:'linear-gradient(135deg, #0d2b0d 0%, #1a1a1a 100%)' },
   { id:'four-shaolin-challengers', title:'The Four Shaolin Challengers', year:1977, genre:'kung-fu', runtime:'90 min', origin:'Hong Kong', badge:'', description:'A merchant opens a kung-fu school in his town, angering the local gangsters. Features Bruce Leung in a classic underdog showdown.', archiveId:'TheFourShaolinChallengers', bgColor:'linear-gradient(135deg, #5c3d10 0%, #1a1a1a 100%)' },
-  { id:'empire-spiritual-ninja', title:'Empire of the Spiritual Ninja', year:1988, genre:'ninja', runtime:'90 min', origin:'Indonesia', badge:'', description:'A wicked ninja takes on his former master in this Godfrey Ho Indonesia-shot exploitation gem. Wild stunts and wilder dubbing.', archiveId:'death-raiders', bgColor:'linear-gradient(135deg, #2b1a0d 0%, #1a1a1a 100%)' },
+  { id:'empire-spiritual-ninja', title:'Empire of the Spiritual Ninja', year:1988, genre:'ninja', runtime:'90 min', origin:'Indonesia', badge:'', description:'A wicked ninja takes on his former master in this Godfrey Ho Indonesia-shot exploitation gem. Wild stunts and wilder dubbing.', archiveId:'death-raiders', imdbUrl:'https://www.imdb.com/title/tt0165755/', bgColor:'linear-gradient(135deg, #2b1a0d 0%, #1a1a1a 100%)' },
   { id:'real-bruce-lee', title:'The Real Bruce Lee', year:1979, genre:'bruceploitation', runtime:'108 min', origin:'Hong Kong', badge:"So Bad It's Good", description:'A Bruceploitation documentary featuring rare footage and imitators. A fascinating and hilarious time capsule of 70s exploitation cinema.', archiveId:'TheRealBruceLee1973', bgColor:'linear-gradient(135deg, #4a0e0e 0%, #1a1a1a 100%)' },
   { id:'flying-guillotine-hd', title:'Flying Guillotine (HD)', year:1976, genre:'wuxia', runtime:'93 min', origin:'Hong Kong', badge:'HD', description:'HD restoration of the classic. A blind assassin with the deadly flying guillotine hunts a one-armed boxer at a martial arts tournament.', archiveId:'the-master-of-the-flying-guillotine-1976', bgColor:'linear-gradient(135deg, #3d2b0e 0%, #1a1a1a 100%)' },
   { id:'master-kung-fu-73', title:'The Master of Kung Fu', year:1973, genre:'kung-fu', runtime:'90 min', origin:'Hong Kong', badge:'', description:'A man battles a powerful gangster who plans to frame him for robbery and murder. Classic early 70s Shaw Brothers era action.', archiveId:'the.master.of.kung.fu.1973.720p.bluray.x264-bipolar..', bgColor:'linear-gradient(135deg, #1a1a0d 0%, #1a1a1a 100%)' },
@@ -568,6 +573,14 @@ function playMovie(id) {
   document.getElementById('nowPlayingMeta').innerHTML = `<span>${m.year}</span> · ${m.runtime} · ${m.origin} · ${genres[m.genre]||m.genre}`;
   document.getElementById('nowPlayingDesc').textContent = m.description;
   document.getElementById('archiveLink').href = 'https://archive.org/details/' + m.archiveId;
+  const imdbLink = document.getElementById('imdbLink');
+  if (m.imdbUrl) {
+    imdbLink.href = m.imdbUrl;
+    imdbLink.hidden = false;
+  } else {
+    imdbLink.hidden = true;
+    imdbLink.removeAttribute('href');
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
