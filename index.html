@@ -433,7 +433,7 @@ function buildPosterDataUrl(movie) {
   const lines = [];
   while (words.length) lines.push(words.splice(0, lines.length === 0 ? 2 : 3).join(' '));
   const titleMarkup = lines.slice(0, 3).map((line, index) =>
-    `<text x="36" y="${210 + (index * 38)}" fill="#f3e6cf" font-family="Bebas Neue, Oswald, sans-serif" font-size="${line.length > 16 ? 28 : 34}" letter-spacing="1.5">${escapeSvgText(line)}</text>`
+    `<text x="40" y="${318 + (index * 42)}" fill="#f3e6cf" font-family="Bebas Neue, Oswald, sans-serif" font-size="${line.length > 16 ? 30 : 38}" letter-spacing="1.5">${escapeSvgText(line)}</text>`
   ).join('');
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
@@ -446,18 +446,25 @@ function buildPosterDataUrl(movie) {
           <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
           <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
         </linearGradient>
+        <radialGradient id="burst" cx="25%" cy="18%" r="80%">
+          <stop offset="0%" stop-color="rgba(212,160,23,0.22)"/>
+          <stop offset="100%" stop-color="rgba(212,160,23,0)"/>
+        </radialGradient>
       </defs>
       <rect width="400" height="600" fill="url(#bg)"/>
-      <rect x="18" y="18" width="364" height="564" fill="none" stroke="rgba(243,230,207,0.16)" stroke-width="2"/>
-      <rect x="30" y="30" width="340" height="170" fill="rgba(0,0,0,0.26)"/>
-      <rect x="30" y="30" width="340" height="170" fill="url(#glow)"/>
-      <text x="36" y="68" fill="#d4a017" font-family="Special Elite, monospace" font-size="16" letter-spacing="3">${badge}</text>
-      <text x="36" y="120" fill="rgba(243,230,207,0.18)" font-family="Bebas Neue, Oswald, sans-serif" font-size="96">${movie.year}</text>
-      <text x="36" y="168" fill="#d8d1c8" font-family="Oswald, sans-serif" font-size="20" letter-spacing="2">${escapeSvgText(movie.origin.toUpperCase())}</text>
-      <rect x="30" y="390" width="340" height="2" fill="rgba(212,160,23,0.55)"/>
+      <rect width="400" height="600" fill="url(#burst)"/>
+      <rect x="18" y="18" width="364" height="564" fill="none" stroke="rgba(243,230,207,0.14)" stroke-width="2"/>
+      <rect x="34" y="34" width="332" height="532" fill="none" stroke="rgba(243,230,207,0.1)" stroke-width="1"/>
+      <path d="M0 128 L400 56" stroke="rgba(243,230,207,0.08)" stroke-width="42"/>
+      <path d="M-30 466 L430 312" stroke="rgba(192,57,43,0.2)" stroke-width="78"/>
+      <circle cx="308" cy="138" r="84" fill="rgba(0,0,0,0.18)"/>
+      <rect x="40" y="54" width="132" height="28" fill="rgba(192,57,43,0.92)"/>
+      <text x="52" y="73" fill="#f3e6cf" font-family="Special Elite, monospace" font-size="13" letter-spacing="2.2">${badge}</text>
+      <text x="40" y="170" fill="rgba(243,230,207,0.14)" font-family="Bebas Neue, Oswald, sans-serif" font-size="92">${movie.year}</text>
+      <text x="40" y="250" fill="rgba(243,230,207,0.78)" font-family="Oswald, sans-serif" font-size="18" letter-spacing="3">${escapeSvgText(movie.origin.toUpperCase())}</text>
       ${titleMarkup}
-      <text x="36" y="538" fill="#d4a017" font-family="Oswald, sans-serif" font-size="19" letter-spacing="2">${escapeSvgText(movie.runtime.toUpperCase())}</text>
-      <text x="36" y="566" fill="rgba(243,230,207,0.72)" font-family="Special Elite, monospace" font-size="12" letter-spacing="2">IRON FIST CINEMA</text>
+      <rect x="40" y="506" width="136" height="2" fill="rgba(212,160,23,0.78)"/>
+      <text x="40" y="540" fill="#d4a017" font-family="Oswald, sans-serif" font-size="18" letter-spacing="2">${escapeSvgText(movie.runtime.toUpperCase())}</text>
     </svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
