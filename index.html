@@ -241,7 +241,7 @@
   <section style="padding: 40px 40px 0;">
     <div class="featured-film">
       <div class="featured-poster">
-        <img class="poster-img" src="https://archive.org/services/img/master-of-the-flying-guillotine" alt="Master of the Flying Guillotine" style="width:100%;height:100%;object-fit:cover;">
+        <img class="poster-img" src="https://archive.org/download/master-of-the-flying-guillotine/master-of-the-flying-guillotine.thumbs/Master%20of%20the%20Flying%20Guillotine_000174.jpg" alt="Master of the Flying Guillotine" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="featured-details">
         <h3>Master of the Flying Guillotine</h3>
@@ -383,13 +383,35 @@ const movies = [
   { id:'kung-fu-action-theater', title:'Kung Fu Action Theater', year:1980, genre:'kung-fu', runtime:'Various', origin:'Various', badge:'Collection', description:'Massive collection of classic martial arts films — rare Wu Tang Collection titles, Sonny Chiba features, and grindhouse gems all in one.', archiveId:'kung-fu-action-theater_202302', bgColor:'linear-gradient(135deg, #2d0d0d 0%, #1a1a1a 100%)' },
 ];
 
+const thumbnailMap = {
+  'master-of-the-flying-guillotine': 'https://archive.org/download/master-of-the-flying-guillotine/master-of-the-flying-guillotine.thumbs/Master%20of%20the%20Flying%20Guillotine_000174.jpg',
+  'thestreetfighter1974': 'https://archive.org/download/thestreetfighter1974/thestreetfighter1974.thumbs/The%20Street%20Fighter%20%281974%29_000174.jpg',
+  'Return_of_the_Kung_Fu_Dragon': 'https://archive.org/download/Return_of_the_Kung_Fu_Dragon/Return_of_the_Kung_Fu_Dragon.png',
+  'NinjaDeath_MPEG': 'https://archive.org/download/NinjaDeath_MPEG/NinjaDeath_MPEG.thumbs/Ninja%20Death%20III_000294.jpg',
+  'turner_video_741': 'https://archive.org/download/turner_video_741/turner_video_741.thumbs/741_000117.jpg',
+  'NinjaDeath': 'https://archive.org/download/NinjaDeath/__ia_thumb.jpg',
+  'KillerOfSnakesFoxOfShaolin': 'https://archive.org/download/KillerOfSnakesFoxOfShaolin/Cover_thumb.jpg',
+  'DEATHCODNINAMER': 'https://archive.org/download/DEATHCODNINAMER/__ia_thumb.jpg',
+  'TheGuyWithTheSecretKungFuMPEG': 'https://archive.org/download/TheGuyWithTheSecretKungFuMPEG/TheGuyWithTheSecretKungFuMPEG.thumbs/The%20Guy%20With%20the%20Secret%20Kung%20Fu_000234.jpg',
+  'ninja.warriors.from.beyond': 'https://archive.org/download/ninja.warriors.from.beyond/__ia_thumb.jpg',
+  'EagleFist': 'https://archive.org/download/EagleFist/EagleFist.thumbs/Eagle%20Fist_000150.jpg',
+  'TheSnakeTheTigerTheCraneMPEG': 'https://archive.org/download/TheSnakeTheTigerTheCraneMPEG/TheSnakeTheTigerTheCraneMPEG.thumbs/The%20Snake%20The%20Tiger%20The%20Crane_000174.jpg',
+  '9-deaths-of-the-ninja_202207': 'https://archive.org/download/9-deaths-of-the-ninja_202207/__ia_thumb.jpg',
+  'TheFourShaolinChallengers': 'https://archive.org/download/TheFourShaolinChallengers/TheFourShaolinChallengers.thumbs/The%20Four%20Shaolin%20Challengers_000174.jpg',
+  'death-raiders': 'https://archive.org/download/death-raiders/__ia_thumb.jpg',
+  'TheRealBruceLee1973': 'https://archive.org/download/TheRealBruceLee1973/TheRealBruceLee.png',
+  'the-master-of-the-flying-guillotine-1976': 'https://archive.org/download/the-master-of-the-flying-guillotine-1976/the-master-of-the-flying-guillotine-1976.thumbs/The%20Master%20of%20The%20Flying%20Guillotine%20%281976%29_000175.jpg',
+  'the.master.of.kung.fu.1973.720p.bluray.x264-bipolar..': 'https://archive.org/download/the.master.of.kung.fu.1973.720p.bluray.x264-bipolar../the.master.of.kung.fu.1973.720p.bluray.x264-bipolar...thumbs/the.master.of.kung.fu.1973.720p.bluray.x264-bipolar.._000115.jpg',
+  'kung-fu-action-theater_202302': 'https://archive.org/download/kung-fu-action-theater_202302/kung-fu-action-theater_202302.thumbs/%23Kung%20Fu%20Action%20Theater%20_000093.jpg',
+};
+
 const genres = { 'kung-fu':'Kung Fu', 'ninja':'Ninja', 'karate':'Karate', 'wuxia':'Wuxia', 'bruceploitation':'Bruceploitation' };
 let activeGenre = null;
 let searchTerm = '';
 let sortMode = 'featured';
 
 function renderMovieCard(m) {
-  const thumb = `https://archive.org/services/img/${m.archiveId}`;
+  const thumb = thumbnailMap[m.archiveId] || `https://archive.org/services/img/${m.archiveId}`;
   return `<div class="movie-card" onclick="playMovie('${m.id}')">
     ${m.badge ? `<div class="movie-badge">${m.badge}</div>` : ''}
     <div class="movie-poster">
