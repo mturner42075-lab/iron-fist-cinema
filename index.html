@@ -10,6 +10,7 @@
 <meta property="og:description" content="Stream classic public domain kung fu and martial arts movies for free. No sign-up. No subscription.">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://mturner42075-lab.github.io/iron-fist-cinema/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='34' fill='%23d4a017'%3E%E6%AD%A6%3C/text%3E%3C/svg%3E">
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2777793891648459" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Oswald:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
@@ -41,10 +42,49 @@
   .nav-links a:hover { color: var(--gold); }
   .nav-links a.active { color: var(--gold); }
   .nav-links a.active::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: var(--gold); }
-  .ad-unit { text-align: center; overflow: hidden; }
+  .ad-unit { text-align: center; overflow: hidden; position: relative; }
   .ad-unit-leaderboard { margin: 16px 40px; min-height: 90px; }
   .ad-unit-sidebar { min-height: 250px; margin-bottom: 24px; }
   .ad-unit-infeed { margin: 24px 0; min-height: 100px; }
+  .ad-unit ins.adsbygoogle { width: 100%; }
+  .ad-fallback {
+    display: flex;
+    min-height: inherit;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    border: 1px dashed rgba(212,160,23,0.28);
+    background:
+      linear-gradient(135deg, rgba(212,160,23,0.08), rgba(192,57,43,0.1)),
+      rgba(255,255,255,0.015);
+    color: var(--faded-paper);
+  }
+  .ad-fallback-copy {
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ad-fallback-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .ad-fallback-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .ad-fallback-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
   .hero { position: relative; padding: 60px 40px 50px; overflow: hidden; background: radial-gradient(ellipse at 20% 50%, rgba(192,57,43,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 30%, rgba(212,160,23,0.08) 0%, transparent 50%), var(--ink-black); }
   .hero-content { position: relative; z-index: 2; max-width: 700px; }
   .hero-badge { display: inline-block; font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--blood-red); border: 1px solid var(--blood-red); padding: 4px 14px; margin-bottom: 16px; }
@@ -68,6 +108,36 @@
   .genre-list li a:hover { color: var(--gold); border-left-color: var(--blood-red); background: rgba(255,255,255,0.02); padding-left: 14px; }
   .genre-count { font-family: 'Special Elite', monospace; font-size: 11px; color: var(--text-muted); }
   .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+  .vault-toolbar { padding: 0 40px 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .vault-toolbar input, .vault-toolbar select {
+    background: var(--charcoal);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-light);
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  .vault-toolbar input { flex: 1 1 260px; min-width: 200px; }
+  .vault-toolbar select { flex: 0 0 220px; }
+  .empty-state {
+    grid-column: 1 / -1;
+    border: 1px dashed rgba(212,160,23,0.4);
+    background: rgba(255,255,255,0.02);
+    padding: 24px;
+    text-align: center;
+    color: var(--faded-paper);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .empty-state strong {
+    display: block;
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
   .movie-card { position: relative; background: var(--charcoal); overflow: hidden; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid rgba(255,255,255,0.04); animation: fadeUp 0.5s ease both; }
   .movie-card:nth-child(1){animation-delay:.05s}.movie-card:nth-child(2){animation-delay:.1s}.movie-card:nth-child(3){animation-delay:.15s}.movie-card:nth-child(4){animation-delay:.2s}.movie-card:nth-child(5){animation-delay:.25s}.movie-card:nth-child(6){animation-delay:.3s}.movie-card:nth-child(7){animation-delay:.35s}.movie-card:nth-child(8){animation-delay:.4s}
   .movie-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 20px rgba(192,57,43,0.15); }
@@ -121,7 +191,7 @@
   .footer-bottom .disclaimer { font-family: 'Special Elite', monospace; font-size: 10px; letter-spacing: 1px; max-width: 500px; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 900px) {
-    .main-layout{grid-template-columns:1fr}.sidebar{display:none}.header-main{padding:12px 20px}.hero{padding:40px 20px}.hero h1{font-size:42px}.section-title{padding:0 20px}.ad-unit-leaderboard{margin:12px 20px}.featured-film{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.main-layout{padding:0 20px}.player-section{padding:20px}.hero-decoration{display:none}.logo-main{font-size:36px}.nav-links{gap:14px}.nav-links a{font-size:12px}
+    .main-layout{grid-template-columns:1fr}.sidebar{display:none}.header-main{padding:12px 20px}.hero{padding:40px 20px}.hero h1{font-size:42px}.section-title{padding:0 20px}.vault-toolbar{padding:0 20px 20px}.ad-unit-leaderboard{margin:12px 20px}.featured-film{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.main-layout{padding:0 20px}.player-section{padding:20px}.hero-decoration{display:none}.logo-main{font-size:36px}.nav-links{gap:14px}.nav-links a{font-size:12px}
   }
   @media (max-width: 500px) {
     .movie-grid{grid-template-columns:repeat(2,1fr);gap:12px}.footer-grid{grid-template-columns:1fr}.nav-links{display:none}
@@ -142,11 +212,11 @@
     </div>
     <nav>
       <ul class="nav-links">
-        <li><a class="active" onclick="showHome()">All Films</a></li>
-        <li><a onclick="filterGenre('kung-fu')">Kung Fu</a></li>
-        <li><a onclick="filterGenre('ninja')">Ninja</a></li>
-        <li><a onclick="filterGenre('karate')">Karate</a></li>
-        <li><a onclick="filterGenre('wuxia')">Wuxia</a></li>
+        <li><a class="active" data-all="true" onclick="showHome()">All Films</a></li>
+        <li><a data-genre="kung-fu" onclick="filterGenre('kung-fu')">Kung Fu</a></li>
+        <li><a data-genre="ninja" onclick="filterGenre('ninja')">Ninja</a></li>
+        <li><a data-genre="karate" onclick="filterGenre('karate')">Karate</a></li>
+        <li><a data-genre="wuxia" onclick="filterGenre('wuxia')">Wuxia</a></li>
       </ul>
     </nav>
   </div>
@@ -154,8 +224,7 @@
 
 <!-- LEADERBOARD AD -->
 <div class="ad-unit ad-unit-leaderboard">
-  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true" data-ad-placement="leaderboard"></ins>
 </div>
 
 <div id="homeView">
@@ -191,8 +260,7 @@
 
   <!-- IN-FEED AD -->
   <div class="ad-unit ad-unit-infeed" style="margin: 24px 40px;">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-placement="hero-infeed"></ins>
   </div>
 
   <section id="movies">
@@ -200,20 +268,27 @@
       <h2 id="gridTitle">The Vault</h2>
       <span class="count" id="gridCount"></span>
     </div>
+    <div class="vault-toolbar">
+      <input id="searchInput" type="search" placeholder="Search titles, description, or origin..." aria-label="Search movies">
+      <select id="sortSelect" aria-label="Sort movies">
+        <option value="featured">Sort: Featured</option>
+        <option value="year-desc">Year: Newest First</option>
+        <option value="year-asc">Year: Oldest First</option>
+        <option value="title-asc">Title: A to Z</option>
+      </select>
+    </div>
     <div class="main-layout">
       <div class="main-content">
         <div class="movie-grid" id="movieGrid"></div>
         <!-- MID-CONTENT AD -->
         <div class="ad-unit ad-unit-infeed">
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true" data-ad-placement="mid-content"></ins>
         </div>
       </div>
       <aside class="sidebar">
         <!-- SIDEBAR AD 1 -->
         <div class="ad-unit ad-unit-sidebar">
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true" data-ad-placement="sidebar-top"></ins>
         </div>
         <div class="sidebar-block">
           <h3>Browse by Genre</h3>
@@ -225,8 +300,7 @@
         </div>
         <!-- SIDEBAR AD 2 (STICKY) -->
         <div class="ad-unit ad-unit-sidebar" style="position:sticky;top:20px;">
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true" data-ad-placement="sidebar-sticky"></ins>
         </div>
       </aside>
     </div>
@@ -243,8 +317,7 @@
     <a id="archiveLink" class="archive-link" href="#" target="_blank">View on Internet Archive →</a>
     <!-- BELOW-PLAYER AD -->
     <div class="ad-unit" style="margin:20px 0;min-height:90px;">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2777793891648459" data-ad-slot="" data-ad-format="auto" data-full-width-responsive="true" data-ad-placement="player-footer"></ins>
     </div>
   </div>
 </div>
@@ -307,6 +380,9 @@ const movies = [
 ];
 
 const genres = { 'kung-fu':'Kung Fu', 'ninja':'Ninja', 'karate':'Karate', 'wuxia':'Wuxia', 'bruceploitation':'Bruceploitation' };
+let activeGenre = null;
+let searchTerm = '';
+let sortMode = 'featured';
 
 function renderMovieCard(m) {
   const thumb = `https://archive.org/services/img/${m.archiveId}`;
@@ -324,7 +400,49 @@ function renderMovieCard(m) {
     </div></div>`;
 }
 
-function renderGrid(list) { document.getElementById('movieGrid').innerHTML = list.map(renderMovieCard).join(''); }
+function renderGrid(list) {
+  if (!list.length) {
+    document.getElementById('movieGrid').innerHTML =
+      `<div class="empty-state"><strong>No Matches Yet</strong>Try a different genre or search term. New titles are added to the vault regularly.</div>`;
+    return;
+  }
+  document.getElementById('movieGrid').innerHTML = list.map(renderMovieCard).join('');
+}
+
+function updateActiveNav(targetGenre) {
+  document.querySelectorAll('.nav-links a').forEach((a) => {
+    const g = a.getAttribute('data-genre');
+    const isAll = a.getAttribute('data-all') === 'true';
+    const shouldBeActive = (isAll && !targetGenre) || (g && g === targetGenre);
+    a.classList.toggle('active', Boolean(shouldBeActive));
+  });
+}
+
+function getFilteredMovies() {
+  let list = [...movies];
+  if (activeGenre) list = list.filter((m) => m.genre === activeGenre);
+  if (searchTerm) {
+    const q = searchTerm.toLowerCase();
+    list = list.filter((m) =>
+      m.title.toLowerCase().includes(q) ||
+      m.description.toLowerCase().includes(q) ||
+      m.origin.toLowerCase().includes(q)
+    );
+  }
+  if (sortMode === 'year-desc') list.sort((a, b) => b.year - a.year);
+  if (sortMode === 'year-asc') list.sort((a, b) => a.year - b.year);
+  if (sortMode === 'title-asc') list.sort((a, b) => a.title.localeCompare(b.title));
+  return list;
+}
+
+function applyFilters() {
+  const list = getFilteredMovies();
+  const titleBase = activeGenre ? `${genres[activeGenre] || activeGenre} Films` : 'The Vault';
+  document.getElementById('gridTitle').textContent = titleBase;
+  document.getElementById('gridCount').textContent = `${list.length} Film${list.length === 1 ? '' : 's'}`;
+  renderGrid(list);
+  updateActiveNav(activeGenre);
+}
 
 function renderGenreList() {
   const c = {};
@@ -335,25 +453,23 @@ function renderGenreList() {
 }
 
 function filterGenre(g) {
-  const f = movies.filter(m => m.genre === g);
-  document.getElementById('gridTitle').textContent = (genres[g]||g) + ' Films';
-  document.getElementById('gridCount').textContent = f.length + ' Films';
-  renderGrid(f);
+  activeGenre = g;
+  applyFilters();
   document.getElementById('homeView').style.display = 'block';
   document.getElementById('playerView').classList.remove('active');
   document.getElementById('movies').scrollIntoView({ behavior: 'smooth' });
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
 }
 
 function showHome() {
-  document.getElementById('gridTitle').textContent = 'The Vault';
-  document.getElementById('gridCount').textContent = movies.length + ' Films';
-  renderGrid(movies);
+  activeGenre = null;
+  searchTerm = '';
+  sortMode = 'featured';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('sortSelect').value = 'featured';
+  applyFilters();
   document.getElementById('homeView').style.display = 'block';
   document.getElementById('playerView').classList.remove('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  document.querySelector('.nav-links a')?.classList.add('active');
 }
 
 function playMovie(id) {
@@ -370,9 +486,49 @@ function playMovie(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-renderGrid(movies);
+function renderAdFallback(unit, placement) {
+  if (!unit || unit.querySelector('.ad-fallback')) return;
+  unit.innerHTML = `
+    <div class="ad-fallback">
+      <div class="ad-fallback-copy">
+        <span class="ad-fallback-label">Advertisement</span>
+        <strong class="ad-fallback-title">Sponsor placement reserved</strong>
+        <span class="ad-fallback-text">This ${placement} slot is ready for AdSense once a live unit ID is assigned.</span>
+      </div>
+    </div>`;
+}
+
+function initializeAds() {
+  const adNodes = document.querySelectorAll('ins.adsbygoogle');
+  adNodes.forEach((adNode) => {
+    const slot = (adNode.dataset.adSlot || '').trim();
+    const placement = adNode.dataset.adPlacement || 'ad';
+    const unit = adNode.closest('.ad-unit');
+    if (!slot) {
+      renderAdFallback(unit, placement.replace(/-/g, ' '));
+      return;
+    }
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      renderAdFallback(unit, placement.replace(/-/g, ' '));
+      console.warn(`AdSense init skipped for ${placement}`, error);
+    }
+  });
+}
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  searchTerm = e.target.value.trim();
+  applyFilters();
+});
+document.getElementById('sortSelect').addEventListener('change', (e) => {
+  sortMode = e.target.value;
+  applyFilters();
+});
+
+applyFilters();
 renderGenreList();
-document.getElementById('gridCount').textContent = movies.length + ' Films';
+initializeAds();
 </script>
 </body>
 </html>
