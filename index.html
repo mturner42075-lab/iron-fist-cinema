@@ -7,7 +7,7 @@
 <meta name="description" content="Watch free archive-hosted martial arts and kung fu movies. Classic grindhouse kung fu, ninja films, Bruce Lee oddities, and karate flicks streaming free. No sign-up required.">
 <meta name="keywords" content="free kung fu movies, archive hosted martial arts, free ninja movies, classic karate films, bruce lee archive, grindhouse martial arts, free streaming">
 <meta property="og:title" content="Iron Fist Cinema — Free Martial Arts Movies">
-<meta property="og:description" content="Stream archive-hosted kung fu, Bruce Lee oddities, workprints, and martial arts movies for free. No sign-up. No subscription.">
+<meta property="og:description" content="Stream archive-hosted kung fu, Bruce Lee oddities, and martial arts movies for free. No sign-up. No subscription.">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://mturner42075-lab.github.io/iron-fist-cinema/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='central' font-size='34' fill='%23d4a017'%3E%E6%AD%A6%3C/text%3E%3C/svg%3E">
@@ -374,7 +374,7 @@
   }
   .now-playing-source[data-source='Interview'] { color: #d5e7ff; border-color: rgba(112,154,255,0.28); background: rgba(112,154,255,0.1); }
   .now-playing-source[data-source='Alt Cut'] { color: #bfe2ff; border-color: rgba(102,168,255,0.28); background: rgba(48,93,145,0.16); }
-  .now-playing-source[data-source='Workprint / Rights vary'] { color: #ffd8a3; border-color: rgba(255,159,67,0.3); background: rgba(112,53,15,0.18); }
+
   .now-playing-desc { font-size: 15px; color: var(--faded-paper); line-height: 1.6; margin-bottom: 16px; max-width: 700px; }
   .now-playing-meta { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); font-family: 'Special Elite', monospace; margin-bottom: 20px; }
   .now-playing-meta span { color: var(--gold); }
@@ -509,16 +509,6 @@
           <span class="count" id="bruceShelfCount"></span>
         </div>
         <div class="shelf-grid" id="bruceShelf"></div>
-      </div>
-      <div class="shelf-block">
-        <div class="shelf-head">
-          <div>
-            <h3>Workprints & Alt Cuts</h3>
-            <p>Collector-grade roughness: Taiwanese cuts, alternate versions, and verified workprints. These entries are labeled when rights may vary by upload or jurisdiction.</p>
-          </div>
-          <span class="count" id="workprintShelfCount"></span>
-        </div>
-        <div class="shelf-grid" id="workprintShelf"></div>
       </div>
     </section>
   
@@ -676,14 +666,6 @@ const movies = [
   { id:'image-of-bruce-lee', title:'Image of Bruce Lee', year:1978, genre:'bruceploitation', runtime:'89 min', origin:'Hong Kong', badge:'Bruce', description:'A pure bruceploitation artifact built to cash in on the legend with lookalikes, proxy mythmaking, and familiar kicks filtered through exploitation logic.', archiveId:'ImageofBruceLee', imdbSearchQuery:'Image of Bruce Lee 1978', bgColor:'linear-gradient(135deg, #4e1717 0%, #1a1a1a 100%)', collections:['bruce'] },
   { id:'bruce-lee-fights-back', title:'Bruce Lee Fights Back from the Grave', year:1976, genre:'bruceploitation', runtime:'84 min', origin:'Hong Kong', badge:'Bruce', description:'Exactly what the title promises: shameless afterlife-era Bruce Lee exploitation, sold with zero restraint and maximum drive-in nerve.', archiveId:'BruceLeeFightsBackFromTheGrave1976', imdbSearchQuery:'Bruce Lee Fights Back from the Grave 1976', bgColor:'linear-gradient(135deg, #591919 0%, #1a1a1a 100%)', collections:['bruce'] },
   { id:'bruce-lost-interview', title:'Bruce Lee: The Lost Interview', year:1971, genre:'action', runtime:'25 min', origin:'Canada', badge:'Interview', description:'The Pierre Berton interview remains one of the cleanest direct windows into Bruce Lee’s philosophy, charisma, and media presence.', archiveId:'BruceLeeTheLostInterviewthePierreBertonShow1971', imdbUrl:'https://www.imdb.com/title/tt0432762/', bgColor:'linear-gradient(135deg, #3f1515 0%, #1a1a1a 100%)', collections:['bruce'] },
-  { id:'the-big-boss', title:'The Big Boss', year:1971, genre:'action', runtime:'100 min', origin:'Hong Kong', badge:'Bruce', description:'Bruce Lee’s first starring vehicle: labor exploitation, gang retaliation, and the sudden realization that his screen presence changes everything.', archiveId:'the-big-boss-1971-mandarin-cut', imdbSearchQuery:'The Big Boss 1971 Bruce Lee', bgColor:'linear-gradient(135deg, #3a1710 0%, #1a1a1a 100%)', collections:['bruce'] },
-  { id:'fist-of-fury', title:'Fist of Fury', year:1972, genre:'action', runtime:'106 min', origin:'Hong Kong', badge:'Bruce', description:'Bruce Lee in full righteous-fury mode, tearing through colonial humiliation and dojo politics with one of the genre’s defining revenge performances.', archiveId:'fist-of-fury-bruce-lee-full-movie-in-english-black-belt-movie-night', imdbSearchQuery:'Fist of Fury 1972 Bruce Lee', bgColor:'linear-gradient(135deg, #411410 0%, #1a1a1a 100%)', collections:['bruce'] },
-  { id:'way-of-the-dragon', title:'The Way of the Dragon', year:1972, genre:'action', runtime:'99 min', origin:'Hong Kong', badge:'Bruce', description:'Bruce Lee writes, directs, and fights Chuck Norris in the Roman Colosseum. If there is a single shelf this site needed, it was one that could hold this.', archiveId:'the.-way.-of.-the.-dragon', imdbSearchQuery:'The Way of the Dragon 1972 Bruce Lee', bgColor:'linear-gradient(135deg, #441a12 0%, #1a1a1a 100%)', collections:['bruce'] },
-  { id:'black-mask-alt', title:'Black Mask: Extended Taiwanese Version', year:1996, genre:'action', runtime:'101 min', origin:'Hong Kong', badge:'Alt Cut', description:'Not a true workprint, but exactly the kind of alternate Hong Kong action cut collectors hunt down: rougher pacing, variant beats, and extra material.', archiveId:'black-mask-1996-taiwanese-version', imdbSearchQuery:'Black Mask 1996', bgColor:'linear-gradient(135deg, #14263f 0%, #1a1a1a 100%)', collections:['workprint'] },
-  { id:'fist-of-legend-alt', title:'Fist of Legend: Extended Taiwanese Version', year:1994, genre:'action', runtime:'111 min', origin:'Hong Kong', badge:'Alt Cut', description:'Another collector-grade alternate cut: Jet Li’s modern classic in a rougher export-adjacent form that sits right next to workprint culture.', archiveId:'fist-of-legend-1994-taiwanese-version', imdbSearchQuery:'Fist of Legend 1994 Jet Li', bgColor:'linear-gradient(135deg, #1d2e43 0%, #1a1a1a 100%)', collections:['workprint'] },
-  { id:'island-of-fire-alt', title:'Island of Fire: Extended Taiwanese Version', year:1990, genre:'action', runtime:'125 min', origin:'Taiwan', badge:'Alt Cut', description:'A prison-action oddity with a stacked cast and an alternate cut that survives online in collector form. This is rough-cut shelf material even if it is not a true workprint.', archiveId:'island-of-fire-1990-extended-taiwanese-version', imdbSearchQuery:'Island of Fire 1990', bgColor:'linear-gradient(135deg, #2a2f45 0%, #1a1a1a 100%)', collections:['workprint'] },
-  { id:'blade-workprint', title:'Blade Workprint', year:1998, genre:'action', runtime:'Workprint', origin:'USA', badge:'Workprint / Rights vary', description:'Verified Archive-hosted Blade workprint entry. Included as a collector-interest rough cut, with rights and availability varying by upload and jurisdiction.', archiveId:'blade-1998-workprint', imdbSearchQuery:'Blade 1998', bgColor:'linear-gradient(135deg, #1d2129 0%, #1a1a1a 100%)', collections:['workprint'] },
-  { id:'crow-workprint', title:'The Crow Workprint', year:1994, genre:'action', runtime:'Workprint', origin:'USA', badge:'Workprint / Rights vary', description:'Verified Archive-hosted workprint material for The Crow. Added as archival rough-cut material only; rights and availability can vary by upload and jurisdiction.', archiveId:'the-crow-workprints-1994_202204', imdbSearchQuery:'The Crow 1994', bgColor:'linear-gradient(135deg, #202020 0%, #1a1a1a 100%)', collections:['workprint'] },
 ];
 
 const thumbnailMap = {
@@ -722,8 +704,6 @@ const thumbnailMap = {
   'black-mask-1996-taiwanese-version': 'assets/curated-covers/black-mask.jpg',
   'fist-of-legend-1994-taiwanese-version': 'assets/curated-covers/fist-of-legend.jpg',
   'island-of-fire-1990-extended-taiwanese-version': 'assets/curated-covers/island-of-fire.jpg',
-  'blade-1998-workprint': 'assets/curated-covers/blade.jpg',
-  'the-crow-workprints-1994_202204': 'assets/curated-covers/the-crow.jpg',
   'the-master-of-the-flying-guillotine-1976': 'assets/posters/flying-guillotine-hd.jpg',
   'the.master.of.kung.fu.1973.720p.bluray.x264-bipolar..': 'assets/final-covers/master-kung-fu-73-plex-alt.jpg',
   'kung-fu-action-theater_202302': 'assets/final-covers-cropped/kung-fu-action-theater-real.jpg',
@@ -805,14 +785,14 @@ function getSourceLabel(movie) {
   if (movie.sourceLabel) return movie.sourceLabel;
   if (movie.badge === 'Interview') return 'Interview';
   if (movie.badge === 'Alt Cut') return 'Alt Cut';
-  if (movie.badge && movie.badge.includes('Workprint')) return 'Workprint / Rights vary';
+  
   return 'Archive Upload';
 }
 
 function getArchiveLinkText(label) {
   if (label === 'Interview') return 'Open Interview on Internet Archive →';
   if (label === 'Alt Cut') return 'Open Alt Cut on Internet Archive →';
-  if (label === 'Workprint / Rights vary') return 'Open Workprint on Internet Archive →';
+  
   return 'Open Archive Upload on Internet Archive →';
 }
 
@@ -902,7 +882,7 @@ function renderShelf(targetId, list, countId) {
 
 function renderProgramShelves() {
   renderShelf('bruceShelf', getShelfMovies('bruce'), 'bruceShelfCount');
-  renderShelf('workprintShelf', getShelfMovies('workprint'), 'workprintShelfCount');
+  
 }
 
 function renderSiteStats() {
