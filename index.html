@@ -501,6 +501,7 @@
     <div class="player-links">
       <a id="archiveLink" class="archive-link" href="#" target="_blank">View on Internet Archive →</a>
       <a id="imdbLink" class="archive-link" href="#" target="_blank" hidden>View on IMDb →</a>
+      <a id="rottenLink" class="archive-link" href="#" target="_blank" hidden>Search Rotten Tomatoes →</a>
     </div>
     <!-- BELOW-PLAYER AD -->
     <div class="ad-unit" style="margin:20px 0;min-height:90px;">
@@ -756,6 +757,7 @@ function playMovie(id) {
   document.getElementById('nowPlayingDesc').textContent = m.description;
   document.getElementById('archiveLink').href = 'https://archive.org/details/' + m.archiveId;
   const imdbLink = document.getElementById('imdbLink');
+  const rottenLink = document.getElementById('rottenLink');
   if (m.imdbUrl) {
     imdbLink.href = m.imdbUrl;
     imdbLink.textContent = 'View on IMDb →';
@@ -768,6 +770,19 @@ function playMovie(id) {
   } else {
     imdbLink.hidden = true;
     imdbLink.removeAttribute('href');
+  }
+  if (m.rtUrl) {
+    rottenLink.href = m.rtUrl;
+    rottenLink.textContent = 'View on Rotten Tomatoes →';
+    rottenLink.hidden = false;
+  } else if (m.rtSearchQuery || m.title) {
+    const query = encodeURIComponent(m.rtSearchQuery || `${m.title} ${m.year}`);
+    rottenLink.href = `https://www.rottentomatoes.com/search?search=${query}`;
+    rottenLink.textContent = 'Search Rotten Tomatoes →';
+    rottenLink.hidden = false;
+  } else {
+    rottenLink.hidden = true;
+    rottenLink.removeAttribute('href');
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
