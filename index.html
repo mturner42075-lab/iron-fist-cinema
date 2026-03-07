@@ -502,6 +502,7 @@
       <a id="archiveLink" class="archive-link" href="#" target="_blank">View on Internet Archive →</a>
       <a id="imdbLink" class="archive-link" href="#" target="_blank" hidden>View on IMDb →</a>
       <a id="rottenLink" class="archive-link" href="#" target="_blank" hidden>Search Rotten Tomatoes →</a>
+      <a id="grindhouseLink" class="archive-link" href="#" target="_blank" hidden>Search Grindhouse Database →</a>
     </div>
     <!-- BELOW-PLAYER AD -->
     <div class="ad-unit" style="margin:20px 0;min-height:90px;">
@@ -538,6 +539,7 @@
       <h4>Resources</h4>
       <ul>
         <li><a href="https://archive.org" target="_blank">Internet Archive</a></li>
+        <li><a href="https://www.grindhousedatabase.com/index.php/Main_Page" target="_blank">Grindhouse Database</a></li>
         <li><a href="mailto:contact@ironfistcinema.com">Contact Us</a></li>
       </ul>
     </div>
@@ -758,6 +760,7 @@ function playMovie(id) {
   document.getElementById('archiveLink').href = 'https://archive.org/details/' + m.archiveId;
   const imdbLink = document.getElementById('imdbLink');
   const rottenLink = document.getElementById('rottenLink');
+  const grindhouseLink = document.getElementById('grindhouseLink');
   if (m.imdbUrl) {
     imdbLink.href = m.imdbUrl;
     imdbLink.textContent = 'View on IMDb →';
@@ -783,6 +786,19 @@ function playMovie(id) {
   } else {
     rottenLink.hidden = true;
     rottenLink.removeAttribute('href');
+  }
+  if (m.grindhouseUrl) {
+    grindhouseLink.href = m.grindhouseUrl;
+    grindhouseLink.textContent = 'View on Grindhouse Database →';
+    grindhouseLink.hidden = false;
+  } else if (m.grindhouseSearchQuery || m.title) {
+    const query = encodeURIComponent(m.grindhouseSearchQuery || m.title);
+    grindhouseLink.href = `https://www.grindhousedatabase.com/index.php?search=${query}&title=Special%3ASearch&go=Go`;
+    grindhouseLink.textContent = 'Search Grindhouse Database →';
+    grindhouseLink.hidden = false;
+  } else {
+    grindhouseLink.hidden = true;
+    grindhouseLink.removeAttribute('href');
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
