@@ -337,6 +337,23 @@
   .video-container { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; margin-bottom: 16px; }
   .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
   .now-playing-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--paper); letter-spacing: 2px; margin-bottom: 8px; }
+  .now-playing-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid rgba(212,160,23,0.24);
+    background: rgba(212,160,23,0.08);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .now-playing-source[data-source='Interview'] { color: #d5e7ff; border-color: rgba(112,154,255,0.28); background: rgba(112,154,255,0.1); }
+  .now-playing-source[data-source='Alt Cut'] { color: #bfe2ff; border-color: rgba(102,168,255,0.28); background: rgba(48,93,145,0.16); }
+  .now-playing-source[data-source='Workprint / Rights vary'] { color: #ffd8a3; border-color: rgba(255,159,67,0.3); background: rgba(112,53,15,0.18); }
   .now-playing-desc { font-size: 15px; color: var(--faded-paper); line-height: 1.6; margin-bottom: 16px; max-width: 700px; }
   .now-playing-meta { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); font-family: 'Special Elite', monospace; margin-bottom: 20px; }
   .now-playing-meta span { color: var(--gold); }
@@ -534,10 +551,11 @@
     <button class="back-btn" onclick="showHome()">← Back to Films</button>
     <div class="video-container" id="videoContainer"></div>
     <h2 class="now-playing-title" id="nowPlayingTitle"></h2>
+    <div class="now-playing-source" id="nowPlayingSource">Archive Upload</div>
     <div class="now-playing-meta" id="nowPlayingMeta"></div>
     <p class="now-playing-desc" id="nowPlayingDesc"></p>
     <div class="player-links">
-      <a id="archiveLink" class="archive-link" href="#" target="_blank">View on Internet Archive →</a>
+      <a id="archiveLink" class="archive-link" href="#" target="_blank">Open Archive Upload on Internet Archive →</a>
       <a id="imdbLink" class="archive-link" href="#" target="_blank" hidden>View on IMDb →</a>
       <a id="rottenLink" class="archive-link" href="#" target="_blank" hidden>Search Rotten Tomatoes →</a>
       <a id="grindhouseLink" class="archive-link" href="#" target="_blank" hidden>Search Grindhouse Database →</a>
@@ -644,6 +662,16 @@ const thumbnailMap = {
   'master-of-the-flying-guillotine': 'assets/real-covers/master-flying-guillotine.jpg',
   'thestreetfighter1974': 'assets/real-covers/street-fighter.jpg',
   'Return_of_the_Kung_Fu_Dragon': 'assets/real-covers-cropped/return-kung-fu-dragon.webp',
+  'BlackFist': 'assets/curated-covers/black-fist.jpg',
+  'T.n.t.Jackson': 'assets/curated-covers/tnt-jackson.jpg',
+  'KarateKidsUSA': 'assets/curated-covers/karate-kids-usa.jpg',
+  'the-36th-chamber-of-shaolin': 'assets/curated-covers/36th-chamber.jpg',
+  'heroes-two': 'assets/curated-covers/heroes-two.jpg',
+  'dragon.-fist.-1979.720p.-blu-ray.x-264-x-0r': 'assets/curated-covers/dragon-fist.jpg',
+  'snake.and.-crane.-arts.of.-shaolin.-1978.1080p.-blu-ray.x-264.-mp-4_202106': 'assets/curated-covers/snake-and-crane.jpg',
+  'the.-fearless.-hyena.-1979.720p.-blu-ray_202106': 'assets/curated-covers/fearless-hyena.jpg',
+  'return.to.the.-36th.-chamber.-1980.720p.-bdrip..': 'assets/curated-covers/return-36th-chamber.jpg',
+  'fists.of.the.white.lotus.1980.bdrip.x264-ghouls..': 'assets/curated-covers/white-lotus.jpg',
   'NinjaDeath_MPEG': 'assets/posters/ninja-death-trilogy.jpg',
   'turner_video_741': 'assets/real-covers-cropped/sister-street-fighter.jpg',
   'NinjaDeath': 'assets/final-covers-cropped/ninja-death.jpg',
@@ -657,6 +685,15 @@ const thumbnailMap = {
   'TheFourShaolinChallengers': 'assets/final-covers/four-shaolin-challengers.jpg',
   'death-raiders': 'assets/final-covers-cropped/empire-spiritual-ninja-real.jpg',
   'TheRealBruceLee1973': 'assets/real-covers-cropped/real-bruce-lee.jpg',
+  'ImageofBruceLee': 'assets/curated-covers/image-of-bruce-lee.jpg',
+  'BruceLeeFightsBackFromTheGrave1976': 'assets/curated-covers/bruce-lee-fights-back.jpg',
+  'the-big-boss-1971-mandarin-cut': 'assets/curated-covers/big-boss.jpg',
+  'fist-of-fury-bruce-lee-full-movie-in-english-black-belt-movie-night': 'assets/curated-covers/fist-of-fury.jpg',
+  'the.-way.-of.-the.-dragon': 'assets/curated-covers/way-of-the-dragon.jpg',
+  'black-mask-1996-taiwanese-version': 'assets/curated-covers/black-mask.jpg',
+  'fist-of-legend-1994-taiwanese-version': 'assets/curated-covers/fist-of-legend.jpg',
+  'blade-1998-workprint': 'assets/curated-covers/blade.jpg',
+  'the-crow-workprints-1994_202204': 'assets/curated-covers/the-crow.jpg',
   'the-master-of-the-flying-guillotine-1976': 'assets/posters/flying-guillotine-hd.jpg',
   'the.master.of.kung.fu.1973.720p.bluray.x264-bipolar..': 'assets/final-covers/master-kung-fu-73-plex-alt.jpg',
   'kung-fu-action-theater_202302': 'assets/final-covers-cropped/kung-fu-action-theater-real.jpg',
@@ -725,6 +762,21 @@ function buildPosterDataUrl(movie) {
       <text x="40" y="540" fill="#d4a017" font-family="Oswald, sans-serif" font-size="18" letter-spacing="2">${escapeSvgText(movie.runtime.toUpperCase())}</text>
     </svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function getSourceLabel(movie) {
+  if (movie.sourceLabel) return movie.sourceLabel;
+  if (movie.badge === 'Interview') return 'Interview';
+  if (movie.badge === 'Alt Cut') return 'Alt Cut';
+  if (movie.badge && movie.badge.includes('Workprint')) return 'Workprint / Rights vary';
+  return 'Archive Upload';
+}
+
+function getArchiveLinkText(label) {
+  if (label === 'Interview') return 'Open Interview on Internet Archive →';
+  if (label === 'Alt Cut') return 'Open Alt Cut on Internet Archive →';
+  if (label === 'Workprint / Rights vary') return 'Open Workprint on Internet Archive →';
+  return 'Open Archive Upload on Internet Archive →';
 }
 
 function renderMovieCard(m, index = 0) {
@@ -847,14 +899,18 @@ function playMovie(id) {
   const m = movies.find(x => x.id === id);
   if (!m) return;
   const archivePath = encodeURIComponent(m.archiveId);
+  const sourceLabel = getSourceLabel(m);
   document.getElementById('homeView').style.display = 'none';
   document.getElementById('playerView').classList.add('active');
   document.getElementById('videoContainer').innerHTML =
     `<iframe src="https://archive.org/embed/${archivePath}" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen allow="autoplay"></iframe>`;
   document.getElementById('nowPlayingTitle').textContent = m.title + ' (' + m.year + ')';
+  document.getElementById('nowPlayingSource').textContent = sourceLabel;
+  document.getElementById('nowPlayingSource').dataset.source = sourceLabel;
   document.getElementById('nowPlayingMeta').innerHTML = `<span>${m.year}</span> · ${m.runtime} · ${m.origin} · ${genres[m.genre]||m.genre}`;
   document.getElementById('nowPlayingDesc').textContent = m.description;
   document.getElementById('archiveLink').href = 'https://archive.org/details/' + archivePath;
+  document.getElementById('archiveLink').textContent = getArchiveLinkText(sourceLabel);
   const imdbLink = document.getElementById('imdbLink');
   const rottenLink = document.getElementById('rottenLink');
   const grindhouseLink = document.getElementById('grindhouseLink');
