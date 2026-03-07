@@ -336,6 +336,27 @@
   .player-wrapper { max-width: 960px; margin: 0 auto; }
   .video-container { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; margin-bottom: 16px; }
   .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .player-detail-rail {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 22px;
+  }
+  .player-poster {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    overflow: hidden;
+  }
+  .player-poster img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    background: #090909;
+  }
+  .player-copy { min-width: 0; }
   .now-playing-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--paper); letter-spacing: 2px; margin-bottom: 8px; }
   .now-playing-source {
     display: inline-flex;
@@ -382,10 +403,10 @@
     .movie-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   }
   @media (max-width: 900px) {
-    .main-layout{grid-template-columns:1fr}.sidebar{display:none}.header-main{padding:12px 20px}.hero{padding:28px 20px 8px}.hero h1{font-size:42px}.section-title{padding:0 20px}.vault-toolbar{padding:0 20px 20px}.ad-unit-leaderboard{margin:12px 20px 0}.featured-film{grid-template-columns:1fr}.featured-wrap{padding:14px 20px 0}.program-blocks{padding:14px 20px 0}.shelf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.footer-grid{grid-template-columns:1fr 1fr}.main-layout{padding:0 20px}.player-section{padding:20px}.hero-decoration{display:none}.logo-main{font-size:36px}.nav-links{gap:14px}.nav-links a{font-size:12px}.hero-statline{grid-template-columns:1fr 1fr 1fr}
+    .main-layout{grid-template-columns:1fr}.sidebar{display:none}.header-main{padding:12px 20px}.hero{padding:28px 20px 8px}.hero h1{font-size:42px}.section-title{padding:0 20px}.vault-toolbar{padding:0 20px 20px}.ad-unit-leaderboard{margin:12px 20px 0}.featured-film{grid-template-columns:1fr}.featured-wrap{padding:14px 20px 0}.program-blocks{padding:14px 20px 0}.shelf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.footer-grid{grid-template-columns:1fr 1fr}.main-layout{padding:0 20px}.player-section{padding:20px}.player-detail-rail{grid-template-columns:180px minmax(0,1fr);gap:18px}.hero-decoration{display:none}.logo-main{font-size:36px}.nav-links{gap:14px}.nav-links a{font-size:12px}.hero-statline{grid-template-columns:1fr 1fr 1fr}
   }
   @media (max-width: 500px) {
-    .movie-grid{grid-template-columns:repeat(2,1fr);gap:12px}.shelf-grid{grid-template-columns:repeat(2,1fr);gap:12px}.shelf-head{display:block}.footer-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-points{gap:8px}.hero-points span{padding:7px 10px;font-size:11px}.hero-sidekick{padding:18px}.hero-statline{grid-template-columns:1fr}.ad-fallback{justify-content:center}.ad-fallback-cta{display:none}
+    .movie-grid{grid-template-columns:repeat(2,1fr);gap:12px}.shelf-grid{grid-template-columns:repeat(2,1fr);gap:12px}.shelf-head{display:block}.footer-grid{grid-template-columns:1fr}.nav-links{display:none}.hero-points{gap:8px}.hero-points span{padding:7px 10px;font-size:11px}.hero-sidekick{padding:18px}.hero-statline{grid-template-columns:1fr}.player-detail-rail{grid-template-columns:1fr}.player-poster{max-width:240px}.ad-fallback{justify-content:center}.ad-fallback-cta{display:none}
   }
 </style>
 </head>
@@ -550,15 +571,22 @@
   <div class="player-wrapper">
     <button class="back-btn" onclick="showHome()">← Back to Films</button>
     <div class="video-container" id="videoContainer"></div>
-    <h2 class="now-playing-title" id="nowPlayingTitle"></h2>
-    <div class="now-playing-source" id="nowPlayingSource">Archive Upload</div>
-    <div class="now-playing-meta" id="nowPlayingMeta"></div>
-    <p class="now-playing-desc" id="nowPlayingDesc"></p>
-    <div class="player-links">
-      <a id="archiveLink" class="archive-link" href="#" target="_blank">Open Archive Upload on Internet Archive →</a>
-      <a id="imdbLink" class="archive-link" href="#" target="_blank" hidden>View on IMDb →</a>
-      <a id="rottenLink" class="archive-link" href="#" target="_blank" hidden>Search Rotten Tomatoes →</a>
-      <a id="grindhouseLink" class="archive-link" href="#" target="_blank" hidden>Search Grindhouse Database →</a>
+    <div class="player-detail-rail">
+      <div class="player-poster">
+        <img id="nowPlayingPoster" src="" alt="">
+      </div>
+      <div class="player-copy">
+        <h2 class="now-playing-title" id="nowPlayingTitle"></h2>
+        <div class="now-playing-source" id="nowPlayingSource">Archive Upload</div>
+        <div class="now-playing-meta" id="nowPlayingMeta"></div>
+        <p class="now-playing-desc" id="nowPlayingDesc"></p>
+        <div class="player-links">
+          <a id="archiveLink" class="archive-link" href="#" target="_blank">Open Archive Upload on Internet Archive →</a>
+          <a id="imdbLink" class="archive-link" href="#" target="_blank" hidden>View on IMDb →</a>
+          <a id="rottenLink" class="archive-link" href="#" target="_blank" hidden>Search Rotten Tomatoes →</a>
+          <a id="grindhouseLink" class="archive-link" href="#" target="_blank" hidden>Search Grindhouse Database →</a>
+        </div>
+      </div>
     </div>
     <!-- BELOW-PLAYER AD -->
     <div class="ad-unit" style="margin:20px 0;min-height:90px;">
@@ -687,11 +715,13 @@ const thumbnailMap = {
   'TheRealBruceLee1973': 'assets/real-covers-cropped/real-bruce-lee.jpg',
   'ImageofBruceLee': 'assets/curated-covers/image-of-bruce-lee.jpg',
   'BruceLeeFightsBackFromTheGrave1976': 'assets/curated-covers/bruce-lee-fights-back.jpg',
+  'BruceLeeTheLostInterviewthePierreBertonShow1971': 'assets/curated-covers/bruce-lost-interview.jpg',
   'the-big-boss-1971-mandarin-cut': 'assets/curated-covers/big-boss.jpg',
   'fist-of-fury-bruce-lee-full-movie-in-english-black-belt-movie-night': 'assets/curated-covers/fist-of-fury.jpg',
   'the.-way.-of.-the.-dragon': 'assets/curated-covers/way-of-the-dragon.jpg',
   'black-mask-1996-taiwanese-version': 'assets/curated-covers/black-mask.jpg',
   'fist-of-legend-1994-taiwanese-version': 'assets/curated-covers/fist-of-legend.jpg',
+  'island-of-fire-1990-extended-taiwanese-version': 'assets/curated-covers/island-of-fire.jpg',
   'blade-1998-workprint': 'assets/curated-covers/blade.jpg',
   'the-crow-workprints-1994_202204': 'assets/curated-covers/the-crow.jpg',
   'the-master-of-the-flying-guillotine-1976': 'assets/posters/flying-guillotine-hd.jpg',
@@ -779,8 +809,12 @@ function getArchiveLinkText(label) {
   return 'Open Archive Upload on Internet Archive →';
 }
 
+function getPosterSrc(movie) {
+  return thumbnailMap[movie.archiveId] || buildPosterDataUrl(movie);
+}
+
 function renderMovieCard(m, index = 0) {
-  const thumb = thumbnailMap[m.archiveId] || buildPosterDataUrl(m);
+  const thumb = getPosterSrc(m);
   return `<div class="movie-card" onclick="playMovie('${m.id}')">
     ${m.badge ? `<div class="movie-badge">${m.badge}</div>` : ''}
     <div class="movie-poster">
@@ -900,11 +934,14 @@ function playMovie(id) {
   if (!m) return;
   const archivePath = encodeURIComponent(m.archiveId);
   const sourceLabel = getSourceLabel(m);
+  const posterSrc = getPosterSrc(m);
   document.getElementById('homeView').style.display = 'none';
   document.getElementById('playerView').classList.add('active');
   document.getElementById('videoContainer').innerHTML =
     `<iframe src="https://archive.org/embed/${archivePath}" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen allow="autoplay"></iframe>`;
   document.getElementById('nowPlayingTitle').textContent = m.title + ' (' + m.year + ')';
+  document.getElementById('nowPlayingPoster').src = posterSrc;
+  document.getElementById('nowPlayingPoster').alt = `${m.title} poster`;
   document.getElementById('nowPlayingSource').textContent = sourceLabel;
   document.getElementById('nowPlayingSource').dataset.source = sourceLabel;
   document.getElementById('nowPlayingMeta').innerHTML = `<span>${m.year}</span> · ${m.runtime} · ${m.origin} · ${genres[m.genre]||m.genre}`;
